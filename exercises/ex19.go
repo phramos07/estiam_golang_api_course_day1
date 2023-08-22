@@ -1,5 +1,47 @@
 package main
 
+import "fmt"
+
+type Account struct {
+	Id      int
+	Owner   string
+	Balance float64
+}
+
+func NewAccount(id int, owner string, balance float64) *Account {
+	return &Account{
+		Id:      id,
+		Owner:   owner,
+		Balance: balance,
+	}
+}
+
+func (a *Account) Deposit(value float64) {
+	a.Balance += value
+}
+
+func (a *Account) Withdraw(value float64) {
+	a.Balance -= value
+}
+
+func (a *Account) String() string {
+	return fmt.Sprintf("Acc Number: %d\nOwner: %s\nBalance: %.2f\n", a.Id, a.Owner, a.Balance)
+}
+
+type AccountManager struct {
+	nextId int
+	// save accounts on slice or map ?
+
+}
+
+func (am *AccountManager) CreateAccount(owner string, initialBalance float64) {
+	acc := NewAccount(am.nextId, owner, initialBalance)
+
+	// save account on the map by ID
+
+	am.nextId++
+}
+
 /*
 Exercise: Building a Basic Banking System
 

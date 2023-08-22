@@ -57,6 +57,14 @@ func (tm *TaskManager) ListTasks() {
 	}
 }
 
+func (tm *TaskManager) RemoveTask(t *Task) {
+	for i, task := range tm.tasks {
+		if task == t {
+			tm.tasks = append(tm.tasks[0:i], tm.tasks[i+1:]...)
+		}
+	}
+}
+
 /*
 Exercise: Creating a Todo List Manager
 
@@ -80,6 +88,7 @@ Test using main.
 */
 
 func main() {
+
 	manager := NewTaskManager()
 
 	task1 := NewTask("Cleaning", "Perform cleaning of the sheets")
@@ -89,6 +98,10 @@ func main() {
 	manager.AddTask(task2)
 
 	task1.Complete()
+
+	manager.ListTasks()
+
+	manager.RemoveTask(task1)
 
 	manager.ListTasks()
 }
