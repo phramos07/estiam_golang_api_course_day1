@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type Account struct {
 	Id      int
@@ -31,15 +33,40 @@ func (a *Account) String() string {
 type AccountManager struct {
 	nextId int
 	// save accounts on slice or map ?
+	accounts map[int]*Account
+}
 
+func NewAccountManager() *AccountManager {
+	return &AccountManager{
+		accounts: make(map[int]*Account),
+	}
 }
 
 func (am *AccountManager) CreateAccount(owner string, initialBalance float64) {
 	acc := NewAccount(am.nextId, owner, initialBalance)
 
 	// save account on the map by ID
+	am.accounts[am.nextId] = acc
 
 	am.nextId++
+}
+
+func (am *AccountManager) GetAccount(accNumber int) (*Account, error) {
+	found := am.accounts[accNumber]
+	if found == nil {
+		return nil, fmt.Errorf("Couldn't find account %d", accNumber)
+	}
+	return found, nil
+}
+
+func (am *AccountManager) ListAccounts() {
+	for _, account := range am.accounts {
+		fmt.Println(account)
+	}
+}
+
+func (am *AccountManager) DeleteAccount(accNumber int) {
+	delete(am.accounts, accNumber)
 }
 
 /*
@@ -62,4 +89,18 @@ Create the main function:
 
 Use the AccountManager methods to create accounts, deposit and withdraw funds, and display account details.*/
 
-func main() {}
+func main() {
+	manager := NewAccountManager()
+
+	manager.CreateAccount("Pedro", 0.0)
+	// manager.CreateAccount("Maxime", 10000000.0)
+
+	manager.ListAccounts()
+
+	acc, err := manager.GetAccount(1)
+	if err == nil {
+		fmt.Printf("Account owner: %s", acc.Owner)
+	} else {
+		fmt.Println(err)
+	}
+}
