@@ -32,8 +32,15 @@ func (t *Task) String() string {
 	)
 }
 
+/*
+NewTaskManager() -> create a new taskmanager
+AddTask(??) -> add a task to the list.
+RemoveTask(??) -> remove a task from the list.
+ListTasks()-> display all tasks in the list and print information of each task.
+*/
+
 type TaskManager struct {
-	tasks []Task
+	tasks []*Task
 }
 
 /*
