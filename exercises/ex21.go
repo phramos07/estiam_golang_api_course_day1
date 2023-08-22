@@ -5,7 +5,8 @@ Exercise: Implementing a Plugin System
 
 Create a simple plugin system that allows you to dynamically load and use different plugins. Plugins can provide various functionalities, and you'll use interfaces to define a common contract for them.
 
-Define a plugin interface Plugin: Create an interface named Plugin that declares a method for executing the plugin's functionality.
+Define a plugin interface Plugin:
+	Create an interface named Plugin that declares a method for executing the plugin's functionality.
 
 Implement plugin structures:
 	Create multiple structs that represent different plugins.
@@ -20,6 +21,19 @@ Implement a simple plugin loader:
 
 Test on main.
 */
+
+// Plugin interface: defines the contract for every plugin.
+type Plugin interface {
+	Execute() string
+}
+
+// A printing plugin: will print a message
+
+type PrintPlugin struct{}
+
+// A math plugin: will perform a math operation (it needs 2 operands and 1 operator)
+
+type MathPlugin struct{}
 
 func main() {
 

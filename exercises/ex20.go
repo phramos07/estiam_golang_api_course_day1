@@ -11,8 +11,7 @@ type MediaItem interface {
 	MediaType() string
 }
 
-type Book struct {
-	MediaItem
+type Book struct { // we don't have to tell the compiler that Book implements MediaItem
 	Title  string
 	Author string
 	Pages  int
@@ -52,6 +51,18 @@ func NewMovie(title string, director string, duration int) *Movie {
 	}
 }
 
+func (m *Movie) Name() string {
+	return m.Title
+}
+
+func (m *Movie) Creator() string {
+	return m.Director
+}
+
+func (m *Movie) MediaType() string {
+	return "Movie"
+}
+
 type MusicAlbum struct {
 	Title   string
 	Artist  string
@@ -64,6 +75,18 @@ func NewMusicAlbum(title string, artist string, ntracks int) *MusicAlbum {
 		Artist:  artist,
 		NTracks: ntracks,
 	}
+}
+
+func (ma *MusicAlbum) Name() string {
+	return ma.Title
+}
+
+func (ma *MusicAlbum) Creator() string {
+	return ma.Artist
+}
+
+func (ma *MusicAlbum) MediaType() string {
+	return "Music Album"
 }
 
 /*
@@ -102,8 +125,11 @@ func main() {
 
 	// add items to this slice
 	book := NewBook("The Go Programming Language", "Donovan", 300)
+	movie := NewMovie("Deep Impact", "James Cameron", 120)
+	album := NewMusicAlbum("Thriller", "MJ", 9)
 
-	items = append(items, book) // it works!
+	objects := []MediaItem{book, movie, album}
+	items = append(items, objects...)
 
 	// print information on each
 	for _, v := range items {
