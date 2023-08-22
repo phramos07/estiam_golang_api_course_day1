@@ -47,6 +47,7 @@ func main() {
 func readFilename() (string, error) {
 	var input string
 	scanner := bufio.NewScanner(os.Stdin)
+	
 	fmt.Println("Input the filename:")
 	if scanner.Scan() {
 		input = scanner.Text()

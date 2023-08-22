@@ -27,6 +27,6 @@ func main() {
 	// fmt.Println(city)
 	// fmt.Println(zipCode)
 	// fmt.Println(country)
-	// fmt.Printf("%s\n%s\n%s\n%s", street, city, zipCode, country)
-	fmt.Println("%s\n%s\n%s\n%s", street, city, zipCode, country)
+	fmt.Printf("%s\n%s\n%s\n%s", street, city, zipCode, country)
+	// fmt.Println("%s\n%s\n%s\n%s", street, city, zipCode, country)
 }

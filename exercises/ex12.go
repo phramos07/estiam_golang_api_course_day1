@@ -39,7 +39,7 @@ func main() {
 
 	wordCount := make(map[string]int, 0)
 	for _, v := range inputArr {
-		wordCount[v]++ // in the case of a map[x]int, int zero value is 0, so this works without checking if the key exists on the map
+		wordCount[v]++ // in the case of a map[any]int, int zero value is 0, so this works without checking if the key exists on the map
 	}
 
 	for key, value := range wordCount {
