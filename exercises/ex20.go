@@ -1,5 +1,71 @@
 package main
 
+import "fmt"
+
+// interfaces cannot be instantiated
+// interfaces cannot be instantiated -> which means NO ATTRIBUTESS!!!!!!!
+// interfaces DESCRIBE METHODS THAT A STRUCT CAN HAVE
+type MediaItem interface {
+	Name() string
+	Creator() string
+	MediaType() string
+}
+
+type Book struct {
+	MediaItem
+	Title  string
+	Author string
+	Pages  int
+}
+
+func NewBook(title string, author string, pages int) *Book {
+	return &Book{
+		Title:  title,
+		Author: author,
+		Pages:  pages,
+	}
+}
+
+func (b *Book) Name() string {
+	return b.Title
+}
+
+func (b *Book) Creator() string {
+	return b.Author
+}
+
+func (b *Book) MediaType() string {
+	return "Book"
+}
+
+type Movie struct {
+	Title    string
+	Director string
+	Duration int
+}
+
+func NewMovie(title string, director string, duration int) *Movie {
+	return &Movie{
+		Title:    title,
+		Director: director,
+		Duration: duration,
+	}
+}
+
+type MusicAlbum struct {
+	Title   string
+	Artist  string
+	NTracks int
+}
+
+func NewMusicAlbum(title string, artist string, ntracks int) *MusicAlbum {
+	return &MusicAlbum{
+		Title:   title,
+		Artist:  artist,
+		NTracks: ntracks,
+	}
+}
+
 /*
 Exercise: Building a Media Library
 
@@ -31,5 +97,16 @@ Test on main:
 */
 
 func main() {
+	// create a slice of media items
+	items := make([]MediaItem, 0)
 
+	// add items to this slice
+	book := NewBook("The Go Programming Language", "Donovan", 300)
+
+	items = append(items, book) // it works!
+
+	// print information on each
+	for _, v := range items {
+		fmt.Println(v)
+	}
 }
