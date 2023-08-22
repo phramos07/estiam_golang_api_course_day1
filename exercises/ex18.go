@@ -43,6 +43,20 @@ type TaskManager struct {
 	tasks []*Task
 }
 
+func NewTaskManager() *TaskManager {
+	return &TaskManager{}
+}
+
+func (tm *TaskManager) AddTask(t *Task) {
+	tm.tasks = append(tm.tasks, t)
+}
+
+func (tm *TaskManager) ListTasks() {
+	for _, task := range tm.tasks {
+		fmt.Printf("%s\n\n", task)
+	}
+}
+
 /*
 Exercise: Creating a Todo List Manager
 
@@ -66,5 +80,15 @@ Test using main.
 */
 
 func main() {
+	manager := NewTaskManager()
 
+	task1 := NewTask("Cleaning", "Perform cleaning of the sheets")
+	task2 := NewTask("Golang Course", "Solve the exercises of the course")
+
+	manager.AddTask(task1)
+	manager.AddTask(task2)
+
+	task1.Complete()
+
+	manager.ListTasks()
 }
